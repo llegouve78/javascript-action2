@@ -23,7 +23,7 @@ jobs:
           title: Test issue
           body: Test issue body
           assignees: |
-            llg
+            llegouve78
 
       - name: Print Output
         id: output
