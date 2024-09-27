@@ -5,15 +5,15 @@ author: 'llg'
 # Define your inputs here.
 inputs:
   token:
-    description: "Github Token"
+    description: 'Github Token'
     required: true
   title:
-    description: "Issue Title"
+    description: 'Issue Title'
     required: true
   body:
-    description: "Issue body"
+    description: 'Issue body'
   assignees:
-    description: "Issue Assignees"      
+    description: 'Issue Assignees'
 
 # Define your outputs here.
 outputs:
