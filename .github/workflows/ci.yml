@@ -1,9 +1,6 @@
 name: Continuous Integration
 
 on:
-  pull_request:
-    branches:
-      - main
   push:
     branches:
       - main
@@ -11,7 +8,13 @@ on:
 permissions:
   contents: read
 
-
+jobs:
+  units: 
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - run: npm test
+    
   test:
     name: GitHub Actions Test
     runs-on: ubuntu-latest
