@@ -6,19 +6,14 @@ on:
       - main
 
 jobs:
-  units: 
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - run: npm ci
-    - run: npm test
-
   test:
     name: GitHub Actions Test
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+      - run: npm ci
+      - uses: actions/checkout@v4
       - uses: ./
         id: issue
         with:
