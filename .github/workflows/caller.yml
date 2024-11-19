@@ -13,11 +13,12 @@ jobs:
       uses: llegouve78/javascript-action2/.github/workflows/checkcert.yml@main
 
       with:
-         which-url: ${{ inputs.name}}
+        which-url: ${{ inputs.name}}
       
    calling-a-reusable-wf-in-the-same-repo:
-      uses: ./.github/workflows/checkcert.yml 
-
+      uses: llegouve78/javascript-action2/.github/workflows/checkcert.yml@main 
+      with:
+        which-url: ${{ inputs.name}}     
    using-reusable-wf-output:
       runs-on: thinkpad
       needs: calling-a-reusable-wf-in-the-same-repo
