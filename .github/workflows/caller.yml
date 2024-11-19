@@ -10,7 +10,7 @@ on:
       
 jobs:
    calling-a-reusable-wf:
-      uses: javascript-action2/workflows/.github/workflows/checkcert.yml@main
+      uses: llegouve78/javascript-action2/.github/workflows/checkcert.yml@main
 
       with:
          which-url: ${{ inputs.name}}
