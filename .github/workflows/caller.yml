@@ -15,7 +15,7 @@ jobs:
          which-url: ${{ inputs.name}}
       secrets:
         access-token: ${{ secrets.ACCESS_TOKEN}} 
-    using-reusable-wf-output:
+   using-reusable-wf-output:
       runs-on: thinkpad
       needs: calling-a-reusable-wf
       steps:
