@@ -1,0 +1,33 @@
+name: Check certificate
+
+on:
+  workflow_dispatch:
+    inputs:
+      which-url:
+        description: "https url to check"
+        type: environment
+        required: true
+
+permissions:
+  issues: write
+
+jobs:
+  test:
+    name: Test https
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm ci
+      - uses: ./
+        id: issue
+        with:
+          token: ${{secrets.GITHUB_TOKEN}}
+          title: Test issue
+          body: Test issue body
+          assignees: |
+            llegouve78
+          who-to-greed: ${{ github.event.inputs.which-url}}
+      - name: Print Output
+        id: output
+        run: echo "${{ steps.issue.outputs.checked }}"

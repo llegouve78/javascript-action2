@@ -1,5 +1,5 @@
-name: 'Open a Github issue'
-description: 'Open de issue'
+name: 'Check Certificate'
+description: 'Get the certificate limit of an https site'
 author: 'llg'
 
 # Define your inputs here.
