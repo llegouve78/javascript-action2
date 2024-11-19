@@ -1,0 +1,24 @@
+name: Calling resusable workflow
+on:
+  workflow_dispatch:
+    inputs: 
+      name:
+        description: "url"
+        type: string
+        default: "www.google.com"
+        required: true
+      
+jobs:
+   calling-a-reusable-wf:
+      uses: javascript-action2/workflows/.github/workflows/checkcert.yml@main
+      with:
+         which-url: ${{ inputs.name}}
+      secrets:
+        access-token: ${{ secrets.ACCESS_TOKEN}} 
+    using-reusable-wf-output:
+      runs-on: thinkpad
+      needs: calling-a-reusable-wf
+      steps:
+        - run: echo ${{needs.calling-a-reusable-wf.outputs.date }}
+        
+        
