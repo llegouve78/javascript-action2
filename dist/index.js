@@ -29250,21 +29250,25 @@ async function run() {
 
     const octokit = github.getOctokit(token)
 
-    const whoToGreet = core.getInput('who-to-greet', { required: true })
+    const whoToGreed = core.getInput('who-to-greed', { required: true })
     //core.info(`Hello, ${whoToGreet}!`)
 
-    core.info(getCertificateExpiryDate(`${whoToGreet}`))
+    //core.info(getCertificateExpiryDate(`${whoToGreed}`))
 
-    const response = await octokit.rest.issues.create({
-      // owner: github.context.repo.owner
-      //
-      ...github.context.repo,
-      title,
-      body,
-      assignees: assignees ? assignees.split('\n') : undefined
-    })
+    //const response = await octokit.rest.issues.create({
+    //owner: github.context.repo.owner
 
-    core.setOutput('issue', response.data)
+    //...github.context.repo,
+    //title,
+    //body,
+    //assignees: assignees ? assignees.split('\n') : undefined
+    //who-to-greed:
+    //})
+
+    core.setOutput(
+      'checked',
+      core.info(getCertificateExpiryDate(`${whoToGreed}`))
+    )
   } catch (error) {
     // Fail the workflow run if an error occurs
     core.setFailed(error.message)
