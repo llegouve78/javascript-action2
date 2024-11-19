@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+      - releases/v1
+    
 
 permissions:
   issues: write
