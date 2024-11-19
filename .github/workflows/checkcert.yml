@@ -24,7 +24,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - run: npm ci && echo "msg-out=${{ steps.issue.outputs.checked }}" >> $GITHUB_OUTPUT
+      - run: |
+          npm ci 
+          echo "msg-out=${{ steps.issue.outputs.checked }}" >> $GITHUB_OUTPUT
       - uses: ./
         id: issue
         with:
