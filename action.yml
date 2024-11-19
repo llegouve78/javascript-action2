@@ -14,7 +14,7 @@ inputs:
     description: 'Issue body'
   assignees:
     description: 'Issue Assignees'
-  whoToGreed:
+  who-to-greed:
     description: 'Site https to test'
     required: true
 
