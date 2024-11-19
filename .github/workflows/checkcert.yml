@@ -1,12 +1,16 @@
 name: Check certificate
 
 on:
-  workflow_dispatch:
+  workflow_call:
     inputs:
       which-url:
         description: "https url to check"
         type: string
         required: true
+    outputs:
+      date:
+        description: "https ssl end" 
+        value: ${{ jobs.test.outputs.msg}}     
 
 permissions:
   issues: write
@@ -15,6 +19,8 @@ jobs:
   test:
     name: Test https
     runs-on: thinkpad
+    outputs:
+      msg: ${{steps.msg-add.outputs.msg-out}}
 
     steps:
       - uses: actions/checkout@v4
@@ -28,6 +34,5 @@ jobs:
           assignees: |
             llegouve78
           who-to-greed: ${{ github.event.inputs.which-url}}
-      - name: Print Output
-        id: output
-        run: echo "${{ steps.issue.outputs.checked }}"
+      - run:  echo "msg-out=${{ steps.issue.outputs.checked }}" >> $GITHUB_OUTPUT
+        id: msg-add 
