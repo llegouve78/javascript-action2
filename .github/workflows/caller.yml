@@ -14,11 +14,13 @@ jobs:
       with:
          which-url: ${{ inputs.name}}
       secrets:
-        access-token: ${{ secrets.ACCESS_TOKEN}} 
+        access-token: ${{ secrets.ACCESS_TOKEN}}
+   calling-a-reusable-wf-in-the-same-repo:
+     uses: ./.github/workflows/checkcert.yml     
    using-reusable-wf-output:
       runs-on: thinkpad
-      needs: calling-a-reusable-wf
+      needs: calling-a-reusable-wf-in-the-same-repo
       steps:
-        - run: echo ${{needs.calling-a-reusable-wf.outputs.date }}
+        - run: echo ${{needs.calling-a-reusable-wf-in-the-same-repo.outputs.date }}
         
         
