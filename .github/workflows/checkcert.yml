@@ -20,19 +20,17 @@ jobs:
     name: Test https
     runs-on: thinkpad
     outputs:
-      msg: ${{steps.msg-add.outputs.msg-out}}
+      msg: ${{steps.issue.outputs.msg-out}}
 
     steps:
       - uses: actions/checkout@v4
-      - run: npm ci
+      - run: npm ci && echo "msg-out=${{ steps.issue.outputs.checked }}" >> $GITHUB_OUTPUT
       - uses: ./
         id: issue
         with:
           token: ${{secrets.GITHUB_TOKEN}}
           title: Test issue
           body: Test issue body
+          who-to-greed: ${{ github.event.inputs.which-url}}
           assignees: |
             llegouve78
-          who-to-greed: ${{ github.event.inputs.which-url}}
-      - run:  echo "msg-out=${{ steps.issue.outputs.checked }}" >> $GITHUB_OUTPUT
-        id: msg-add 
