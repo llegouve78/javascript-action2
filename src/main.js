@@ -3,7 +3,7 @@ const github = require('@actions/github')
 const https = require('https')
 
 async function getCertificateExpiryDate(hostname) {
-  try {
+  return new Promise((resolve, reject) => {
     const options = {
       hostname,
       port: 443,
@@ -14,21 +14,22 @@ async function getCertificateExpiryDate(hostname) {
     const req = https.request(options, res => {
       const certificate = res.connection.getPeerCertificate()
       if (!certificate || !certificate.valid_to) {
-        console.error('No certificate information available.')
+        //('No certificate information available.')
+        reject(new Error('No certificate information available.'))
         return
       }
-      return `The certificate for ${hostname} expires on: ${certificate.valid_to}`
+      resolve(
+        `The certificate for ${hostname} expires on: ${certificate.valid_to}`
+      )
     })
 
     req.on('error', e => {
-      return `Problem with request: ${e.message}`
+      //reject(`Problem with request: ${e.message}`)
+      reject(new Error(`Problem with request: ${e.message}`))
     })
 
     req.end()
-  } catch (error) {
-    // Fail the workflow run if an error occurs
-    core.setFailed(error.message)
-  }
+  })
 }
 
 /**
@@ -58,11 +59,8 @@ async function run() {
     //assignees: assignees ? assignees.split('\n') : undefined
     //who-to-greed:
     //})
-
-    core.setOutput(
-      'checked',
-      core.info(getCertificateExpiryDate(`${whoToGreed}`))
-    )
+    const expiryMessage = await getCertificateExpiryDate(`${whoToGreed}`)
+    core.setOutput('checked', expiryMessage)
   } catch (error) {
     // Fail the workflow run if an error occurs
     core.setFailed(error.message)
