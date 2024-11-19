@@ -28,4 +28,4 @@ jobs:
           who-to-greed: www.google.com
       - name: Print Output
         id: output
-        run: echo "${{ steps.test-action.outputs.issue }}"
+        run: echo "${{ steps.test-action.outputs.checked }}"
