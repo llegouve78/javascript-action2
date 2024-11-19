@@ -14,11 +14,14 @@ inputs:
     description: 'Issue body'
   assignees:
     description: 'Issue Assignees'
+  whoToGreed:
+    description: 'Site https to test'
+    required: true
 
 # Define your outputs here.
 outputs:
-  issue:
-    description: 'Javascript github action'
+  checked:
+    description: 'Check certificate result'
 
 runs:
   using: node20

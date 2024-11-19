@@ -29206,6 +29206,37 @@ function wrappy (fn, cb) {
 
 const core = __nccwpck_require__(2186)
 const github = __nccwpck_require__(5438)
+const https = __nccwpck_require__(5687)
+
+async function getCertificateExpiryDate(hostname) {
+  try {
+    const options = {
+      hostname,
+      port: 443,
+      method: 'GET',
+      rejectUnauthorized: false // Bypass SSL validation
+    }
+
+    const req = https.request(options, res => {
+      const certificate = res.connection.getPeerCertificate()
+      if (!certificate || !certificate.valid_to) {
+        console.error('No certificate information available.')
+        return
+      }
+      return `The certificate for ${hostname} expires on: ${certificate.valid_to}`
+    })
+
+    req.on('error', e => {
+      return `Problem with request: ${e.message}`
+    })
+
+    req.end()
+  } catch (error) {
+    // Fail the workflow run if an error occurs
+    core.setFailed(error.message)
+  }
+}
+
 /**
  * The main function for the action.
  * @returns {Promise<void>} Resolves when the action is complete.
@@ -29218,6 +29249,11 @@ async function run() {
     const assignees = core.getInput('assignees')
 
     const octokit = github.getOctokit(token)
+
+    const whoToGreet = core.getInput('who-to-greet', { required: true })
+    //core.info(`Hello, ${whoToGreet}!`)
+
+    core.info(getCertificateExpiryDate(`${whoToGreet}`))
 
     const response = await octokit.rest.issues.create({
       // owner: github.context.repo.owner
