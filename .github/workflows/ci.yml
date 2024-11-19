@@ -24,7 +24,7 @@ jobs:
           body: Test issue body
           assignees: |
             llegouve78
-
+          whoToGreet: www.google.com 
       - name: Print Output
         id: output
         run: echo "${{ steps.test-action.outputs.issue }}"
