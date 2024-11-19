@@ -14,8 +14,7 @@ jobs:
 
       with:
          which-url: ${{ inputs.name}}
-      secrets:
-        access-token: ${{ secrets.ACCESS_TOKEN}}
+      
    calling-a-reusable-wf-in-the-same-repo:
       uses: ./.github/workflows/checkcert.yml     
    using-reusable-wf-output:
