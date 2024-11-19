@@ -1,5 +1,5 @@
-name: 'Open a Github issue'
-description: 'Open de issue'
+name: 'Check Certificate'
+description: 'Get the certificate limit of an https site'
 author: 'llg'
 
 # Define your inputs here.
@@ -14,11 +14,14 @@ inputs:
     description: 'Issue body'
   assignees:
     description: 'Issue Assignees'
+  who-to-greed:
+    description: 'Site https to test'
+    required: true
 
 # Define your outputs here.
 outputs:
-  issue:
-    description: 'Javascript github action'
+  checked:
+    description: 'Check certificate result'
 
 runs:
   using: node20
